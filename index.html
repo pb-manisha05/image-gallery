@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery with Lightbox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .gallery img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+        .lightbox img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container gallery">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="img1.jpg" alt="Image 1" class="img-thumbnail" data-toggle="lightbox">
+        </div>
+        <div class="col-md-4">
+            <img src="img2.jpg" alt="Image 2" class="img-thumbnail" data-toggle="lightbox">
+        </div>
+        <div class="col-md-4">
+            <img src="img3.jpg" alt="Image 3" class="img-thumbnail" data-toggle="lightbox">
+        </div>
+    </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.gallery img').click(function() {
+            const src = $(this).attr('src');
+            $('#lightbox-img').attr('src', src);
+            $('#lightbox').fadeIn();
+        });
+        
+        $('.lightbox .close').click(function() {
+            $('#lightbox').fadeOut();
+        });
+
+        $('#lightbox').click(function() {
+            $(this).fadeOut();
+        });
+    });
+</script>
+
+</body>
+</html>
